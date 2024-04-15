@@ -1,2 +1,1 @@
-# TescaGenerator
 # SW2StuffingGeneratorComponent
