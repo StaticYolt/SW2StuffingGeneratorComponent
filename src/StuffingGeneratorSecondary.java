@@ -8,7 +8,7 @@ import components.standard.Standard;
 
 public abstract class StuffingGeneratorSecondary<T>
         implements StuffingGenerator<T> {
-
+    //Only works with inner type thingy being a String
     @Override
     public void generateSimple(int size) {
         this.clear();
@@ -34,7 +34,7 @@ public abstract class StuffingGeneratorSecondary<T>
 
     @Override
     public Standard<T> getRep() {
-        Standard toRep = (Standard) this.getOutputType().newInstance();
+        Standard toRep = this.getOutputType();
         Sequence currSeq = this.currRep();
         if (toRep.getClass().toString().contains("class components.sequence")) {
 
@@ -53,7 +53,7 @@ public abstract class StuffingGeneratorSecondary<T>
     }
 
     public Sequence getSequence(Sequence rep) {
-        Sequence toRep = (Sequence) this.getOutputType().newInstance();
+        Sequence toRep = (Sequence) this.getOutputType();
         for (Object x : rep) {
             toRep.add(toRep.length(), x);
         }
@@ -93,12 +93,11 @@ public abstract class StuffingGeneratorSecondary<T>
             Sequence<BinaryTree<T>> currSequenceBT = binaryTreeRepMap
                     .value(logLength - currBinary);
             for (int i = startPos; i > endPos; i--) {
-                BinaryTree<T> currBT = (BinaryTree<T>) this.getOutputType()
-                        .newInstance();
+                BinaryTree<T> currBT = (BinaryTree<T>) this.getOutputType();
                 if (args[i] != null) {
                     currBT.assemble(args[i],
-                            (BinaryTree<T>) this.getOutputType().newInstance(),
-                            (BinaryTree<T>) this.getOutputType().newInstance());
+                            (BinaryTree<T>) this.getOutputType(),
+                            (BinaryTree<T>) this.getOutputType());
                 }
                 currSequenceBT.add(currSequenceBT.length(), currBT);
 
@@ -117,10 +116,8 @@ public abstract class StuffingGeneratorSecondary<T>
 
             for (int j = 0; j < nextBTM.length(); j++) {
                 BinaryTree<T> tempParentBT = nextBTM.remove(j);
-                BinaryTree<T> leftBT = (BinaryTree<T>) this.getOutputType()
-                        .newInstance();
-                BinaryTree<T> rightBT = (BinaryTree<T>) this.getOutputType()
-                        .newInstance();
+                BinaryTree<T> leftBT = (BinaryTree<T>) this.getOutputType();
+                BinaryTree<T> rightBT = (BinaryTree<T>) this.getOutputType();
                 if (currBTM.length() > 0) {
                     leftBT = currBTM.remove(0);
                 }
@@ -130,8 +127,7 @@ public abstract class StuffingGeneratorSecondary<T>
                 }
 
                 T currElement = tempParentBT.root();
-                BinaryTree<T> parentBT = (BinaryTree<T>) this.getOutputType()
-                        .newInstance();
+                BinaryTree<T> parentBT = (BinaryTree<T>) this.getOutputType();
                 if (currElement != null) {
                     parentBT.assemble(currElement, leftBT, rightBT);
                 }
