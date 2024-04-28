@@ -1,3 +1,4 @@
+package components.StuffingGenerator;
 import components.standard.Standard;
 
 /**

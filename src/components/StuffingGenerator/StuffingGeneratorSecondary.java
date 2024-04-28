@@ -1,3 +1,4 @@
+package components.StuffingGenerator;
 import components.binarytree.BinaryTree;
 import components.map.Map;
 import components.map.Map1L;
